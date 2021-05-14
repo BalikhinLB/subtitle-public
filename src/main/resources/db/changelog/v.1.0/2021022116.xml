@@ -1,0 +1,203 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="ljast (generated)" id="1614015467358-1">
+        <createSequence incrementBy="1" sequenceName="jpwh_sequence" startValue="1000"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-2">
+        <createTable tableName="authority">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="authorityPK"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-3">
+        <createTable tableName="file_data">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="file_dataPK"/>
+            </column>
+            <column name="data" type="OID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-4">
+        <createTable tableName="file_text">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="file_textPK"/>
+            </column>
+            <column name="creation_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="description" type="TEXT"/>
+            <column name="filename" type="VARCHAR(255)"/>
+            <column name="size" type="VARCHAR(255)"/>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="file_data_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-5">
+        <createTable tableName="ignored_words">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ignored_wordsPK"/>
+            </column>
+            <column name="word" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-6">
+        <createTable tableName="sentence">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="sentencePK"/>
+            </column>
+            <column name="number" type="INTEGER"/>
+            <column name="sentence" type="TEXT"/>
+            <column name="file_text_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-7">
+        <createTable tableName="star_dict_words">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="star_dict_wordsPK"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="transcription" type="VARCHAR(255)"/>
+            <column name="word" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-8">
+        <createTable tableName="user_authority">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="authority_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-9">
+        <createTable tableName="user_dict_word">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_dict_wordPK"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="lemma" type="VARCHAR(255)"/>
+            <column name="transcription" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-10">
+        <createTable tableName="user_known_word">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_known_wordPK"/>
+            </column>
+            <column name="lemma" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-11">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="usersPK"/>
+            </column>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="enabled" type="BOOLEAN"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-12">
+        <createTable tableName="word">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="wordPK"/>
+            </column>
+            <column name="count" type="INTEGER"/>
+            <column name="known" type="BOOLEAN"/>
+            <column name="lemma" type="VARCHAR(255)"/>
+            <column name="file_text_id" type="BIGINT"/>
+            <column name="stardict_word_id" type="BIGINT"/>
+            <column name="user_dictionary_word_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-13">
+        <createTable tableName="word_sentences">
+            <column name="word_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="sentences_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-14">
+        <createTable tableName="word_tags">
+            <column name="word_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tag" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-15">
+        <createTable tableName="word_words">
+            <column name="word_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="word" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-16">
+        <addUniqueConstraint columnNames="authority_name" constraintName="UC_AUTHORITYAUTHORITY_NAME_COL" tableName="authority"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-17">
+        <addUniqueConstraint columnNames="email" constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-18">
+        <addUniqueConstraint columnNames="username" constraintName="UC_USERSUSERNAME_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-19">
+        <addUniqueConstraint columnNames="file_data_id" constraintName="UK_67jual7sviuiqel97eu3v5051" tableName="file_text"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-20">
+        <addForeignKeyConstraint baseColumnNames="sentences_id" baseTableName="word_sentences" constraintName="FK1wgu861465t2c0npuqs2wndi9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="sentence" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-21">
+        <addForeignKeyConstraint baseColumnNames="file_text_id" baseTableName="word" constraintName="FK22wacr5ytyq6vtlqhntqggxb1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="file_text" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-22">
+        <addForeignKeyConstraint baseColumnNames="word_id" baseTableName="word_sentences" constraintName="FK2n7hk100a9ie4ahh43ckr63q4" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="word" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-23">
+        <addForeignKeyConstraint baseColumnNames="word_id" baseTableName="word_words" constraintName="FK2w061cstulf5puurj7243c1t4" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="word" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-24">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_dict_word" constraintName="FK7icapoqhayu4nj37fox6gtny8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-25">
+        <addForeignKeyConstraint baseColumnNames="stardict_word_id" baseTableName="word" constraintName="FK7mdblop4g853aeyjy5tmd4oi2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="star_dict_words" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-26">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_known_word" constraintName="FKa0fgh3j1lfkp9k0i3wejbsnsw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-27">
+        <addForeignKeyConstraint baseColumnNames="word_id" baseTableName="word_tags" constraintName="FKd3ahab2tdpgx6nr6g3dambu1o" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="word" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-28">
+        <addForeignKeyConstraint baseColumnNames="file_data_id" baseTableName="file_text" constraintName="FKdnj0bb9s1pl1l9n8a7982gur9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="file_data" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-29">
+        <addForeignKeyConstraint baseColumnNames="authority_id" baseTableName="user_authority" constraintName="FKgvxjs381k6f48d5d2yi11uh89" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="authority" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-30">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_authority" constraintName="FKhi46vu7680y1hwvmnnuh4cybx" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-31">
+        <addForeignKeyConstraint baseColumnNames="file_text_id" baseTableName="sentence" constraintName="FKkdoen6pk9i2ujkupjphydtwk0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="file_text" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-32">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="file_text" constraintName="FKlj6340ld7ud5xwhw4tvqysdjk" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="ljast (generated)" id="1614015467358-33">
+        <addForeignKeyConstraint baseColumnNames="user_dictionary_word_id" baseTableName="word" constraintName="FKn1kfphmjxc2aiv1epk8fqcky9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_dict_word" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
