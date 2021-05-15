@@ -32,3 +32,9 @@ build/
 ### VS Code ###
 .vscode/
 /bin/
+
+/.dbeaver/
+/.tern-project
+/.mvn/
+/mvnw
+/mvnw.cmd
